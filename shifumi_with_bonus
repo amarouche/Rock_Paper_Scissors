@@ -1,0 +1,70 @@
+#!/bin/bash
+
+Valc=$1
+nbargu=$#
+aide(){ 
+	. man.sh
+	. scor.sh
+	texthelp
+	
+	tab=('' 'Play' 'Menu' 'Quit' )
+	echo -e "\n        \033[94m+═════════════════════════════════════+\033[0m"
+	echo -e "        \033[94m|\033[0m              1-\033[92m ${tab[1]}   \033[0m             \033[94m|\033[0m"
+	echo -e "       \033[94m |\033[0m              2-\033[92m ${tab[2]}   \033[0m             \033[94m|\033[0m"
+	echo -e "       \033[94m |\033[0m              3-\033[92m ${tab[3]}   \033[0m             \033[94m|\033[0m" 
+	echo -e "      \033[94m  +═════════════════════════════════════+\033[0m\n"
+	read -p "Your choice : "  -n 1 choix
+
+if [[ $choix == 1 ]];then
+	. solo.sh
+		solo
+elif [[ $choix == 3 ]];then
+	echo -e "\n"
+	quitter
+fi
+}
+
+menus(){
+if [[ $nbargu -gt 1 ]];then
+			echo -e "\nThere are too many arguments, enter two argument !\n"
+	else
+		. man.sh
+		if [[ $Valc =~ [0-9] ]];then
+			quit=0
+			while [[ $quit -eq 0 ]]; do
+				logo
+				. affi.sh
+				affmenu
+				if [[ $choix =~ [1-3] ]];then
+					case $choix in
+						"1")
+						. solo.sh
+						solo ;;
+						"2")
+						aide;;
+						"3")
+						echo -e "\n"
+						quitter ;;
+					esac
+					# if [[ $choix == 1 ]];then
+					# 	. solo.sh
+					# 	solo
+					# elif [[ $choix == 2 ]];then
+					# 	aide
+					# elif [[ $choix == 3 ]];then
+					# 	echo -e "\n"
+					# 	quitter
+					# fi
+				else
+					errornum
+				fi
+			done	
+		else 
+			echo -e "\nYou must enter a number\n"
+		fi
+fi
+}
+
+menus
+
+

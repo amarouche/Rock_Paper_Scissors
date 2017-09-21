@@ -1,0 +1,18 @@
+#!/bin/bash
+
+Valc=$1
+nbargu=$#
+menus(){
+if [[ $nbargu -gt 1 ]];then
+	echo -e "\nThere are too many arguments, enter two argument !\n"
+	else	
+		if [[ $Valc =~ [0-9] ]];then
+			echo -e "\nReady to play Shifumi? Here we go!"
+			. sujetshifu.sh
+				solosimpl
+			else
+				echo -e "\nYou must enter a number\n"
+		fi
+fi
+}
+menus
